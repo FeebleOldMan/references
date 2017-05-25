@@ -1,45 +1,43 @@
 #!/usr/bin/env python3
-"""Pig Latin
+"""Count Vowels
 
-Transposes initial consonant sound to the end of the word and appends 'ay'.
-Rules can be seen at:
-https://en.wikipedia.org/wiki/Pig_latin
+Counts the number of vowels in a text string.
+Prints the sum of each vowel found.
 """
 
 import sys
 import getopt
 
-def pig_latinize(sentence):
-    """Converts sentence to pig latin.
+def count_vowels(text):
+    """Counts number of vowels in string text. Prints a summary of vowels.
 
-    All consonants before first vowel of each word is shifted to the end of the
-    word. '-ay' is appended to the word.
-    If the word starts with a vowel, '-way' is appended to the word.
+    text        string of input text
 
-    sentence        string to pig latinize
-    return          string sentence in pig latin
-
-    >>> pig_latinize('a for apple')
-    'away orfay appleway'
-    >>> pig_latinize('b for banana')
-    'bay orfay ananabay'
+    >>> count_vowels('')
+    Vowel Counts
+    ------------
+    No vowels found
+    >>> count_vowels('a cat in a bag')
+    Vowel Counts
+    ------------
+    a: 4
+    i: 1
     """
     VOWELS = ('a', 'e', 'i', 'o', 'u',)
+    vowel_count = {}
 
-    sentence = sentence.split()
-    for i, word in enumerate(sentence):
-        if word.startswith(VOWELS):
-            word += 'way'
-        else:
-            for j, letter in enumerate(word):
-                if letter in VOWELS:
-                    word = word[j:] + word[:j] + 'ay'
-                    break
-            else:
-                word += 'ay'
-        sentence[i] = word
-    sentence = ' '.join(sentence)
-    return sentence
+    for letter in list(text.lower()):
+        if letter in VOWELS:
+            vowel_count[letter] = vowel_count.get(letter, 0) + 1
+
+    print("Vowel Counts")
+    print("------------")
+    if vowel_count:
+        for letter, value in vowel_count.items():
+            print("{}: {}".format(letter, str(value)))
+    else:
+        print("No vowels found")
+
 
 def main(argv):
     """Main function"""
@@ -71,8 +69,7 @@ Options:
         elif opt in ("-s", "--stress"):
             stress()
             sys.exit()
-    sentence = input("Enter sentence to pig latinize: ")
-    print(pig_latinize(sentence))
+    count_vowels(input("Enter a string: "))
 
 def test():
     """Runs doctest on functions."""
