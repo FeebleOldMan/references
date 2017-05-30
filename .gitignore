@@ -1,0 +1,6 @@
+#--------
+# Python
+#--------
+# Compiled Source and Caches
+*.py[cod]
+__pycache__/
