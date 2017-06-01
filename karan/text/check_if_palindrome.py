@@ -38,7 +38,8 @@ def is_palindrome(string):
 def main(argv):
     """Main function"""
 
-    help_text = """CODE! v1.0
+    help_text = """
+Check If Palindrome v1.0
 
 Usage:
   python CODE.py [options]
@@ -49,15 +50,13 @@ Options:
   -t, --test                test"""
 
     try:
-        opts, args = getopt.getopt(argv, "hts", ["help", "test", "stress"])
+        opts, _ = getopt.getopt(argv, "hts", ["help", "test", "stress"])
     except getopt.GetoptError:
-        print(args)
         print(help_text)
         sys.exit(2)
-    for opt, arg in opts:
+    for opt, _ in opts:
         if opt in ("-h", "--help"):
-            print(arg)
-            print(help)
+            print(help_text)
             sys.exit()
         elif opt in ("-t", "--test"):
             test()
