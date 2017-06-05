@@ -55,7 +55,8 @@ Options:
 
     try:
         opts, _ = getopt.getopt(argv, "hts", ["help", "test", "stress"])
-    except getopt.GetoptError:
+    except getopt.GetoptError as error:
+        print("Invalid option: {}".format(error))
         print(help_text)
         sys.exit(2)
     for opt, _ in opts:
